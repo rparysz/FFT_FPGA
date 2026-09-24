@@ -64,6 +64,15 @@ Known limitations, left as they were in 2021:
 
 ## Files
 
-`FFT_TOP.vhd` ties it together; `AGU`, `BFU`, `COMPLEX_RAM`, `twiddle_rom`,
-`complex_mult`, `RAM_BLOCK` are the core; `fft_mag`, `fft_out_ram`,
-`vga_input_controller` handle display; `*_tb.vhd` are the testbenches.
+    rtl/    FFT_TOP.vhd            top level, ties the datapath together
+            AGU.vhd               address generation (bit-reversal + stage addressing)
+            BFU.vhd               pipelined radix-2 butterfly
+            complex_mult.vhd      complex multiplier
+            twiddle_rom.vhd       precomputed cos / -sin table
+            COMPLEX_RAM.vhd       dual-bank complex sample memory
+            RAM_BLOCK.vhd         BRAM primitive
+            resize_48b.vhd        product resize / rounding
+            delay.vhd, and.vhd    pipeline / glue helpers
+            fft_out_ram.vhd       output spectrum buffer
+            vga_input_controller.vhd  VGA display of the magnitude spectrum
+    tb/     *_tb.vhd              per-block testbenches for simulation
